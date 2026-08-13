@@ -76,6 +76,13 @@
       "linter": "eslint",
       "style": "scss",
       "unitTestRunner": "vitest-angular"
+    },
+    "@nx/angular:component": {
+      "style": "scss",
+      "type": "component"
+    },
+    "@nx/angular:service": {
+      "type": "service"
     }
   }
 }

@@ -10,15 +10,31 @@
 
 To run tasks with Nx use:
 
+#### Run projects 
+server
+```sh
+    nx run api:serve
+```
+front
+```sh
+    nx run web:serve
+```
+
 ```sh
 npx nx <target> <project-name>
 ```
 
 For example:
-
 ```sh
 npx nx build myproject
 ```
+
+### Angular nx creatre components, services...
+```sh
+    npx nx g @nx/angular:service
+    npx nx g @nx/angular:component
+```
+
 
 These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
 

@@ -5,6 +5,12 @@ dist
 tmp
 out-tsc
 
+# Agents AI
+.agents
+.claude
+.windsurf
+
+
 # dependencies
 node_modules
 
@@ -49,3 +55,4 @@ Thumbs.db
 __screenshots__/
 
 .env
+/generated/prisma

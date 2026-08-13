@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NxWelcome } from './nx-welcome';
+import { Test } from './services/test';
 
 @Component({
   imports: [NxWelcome, RouterModule],
@@ -10,4 +11,9 @@ import { NxWelcome } from './nx-welcome';
 })
 export class App {
   protected title = 'web';
+
+  private test  = inject(Test);
+
+  ngOnInit() { 
+  }
 }
