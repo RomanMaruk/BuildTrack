@@ -1,0 +1,254 @@
+<div class="register">
+  <div class="register__header">
+    <h1 class="register__title">
+      Створення акаунта
+    </h1>
+
+    <p class="register__subtitle">
+      Створіть акаунт, щоб почати облік витрат
+    </p>
+  </div>
+
+  <form
+    class="register__form"
+    (submit)="onSubmit()"
+  >
+    <!-- Name -->
+    <div class="row g-3">
+      <div class="col-6">
+        <div class="register__field">
+          <label
+            for="firstName"
+            class="register__label"
+          >
+            Ім'я
+          </label>
+
+          <input
+            id="firstName"
+            type="text"
+            pInputText
+            class="w-100"
+            autocomplete="given-name"
+            placeholder="Ім'я"
+            [formField]="registerForm.firstName"
+          />
+
+          @if (
+            registerForm.firstName().touched() &&
+            registerForm.firstName().invalid()
+          ) {
+            <div class="register__error">
+              @for (
+                error of registerForm.firstName().errors();
+                track error
+              ) {
+                <span>{{ error.message }}</span>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Last name -->
+      <div class="col-6">
+        <div class="register__field">
+          <label
+            for="lastName"
+            class="register__label"
+          >
+            Прізвище
+          </label>
+
+          <input
+            id="lastName"
+            type="text"
+            pInputText
+            class="w-100"
+            autocomplete="family-name"
+            placeholder="Прізвище"
+            [formField]="registerForm.lastName"
+          />
+
+          @if (
+            registerForm.lastName().touched() &&
+            registerForm.lastName().invalid()
+          ) {
+            <div class="register__error">
+              @for (
+                error of registerForm.lastName().errors();
+                track error
+              ) {
+                <span>{{ error.message }}</span>
+              }
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div class="register__field">
+      <label
+        for="email"
+        class="register__label"
+      >
+        Email
+      </label>
+
+      <input
+        id="email"
+        type="email"
+        pInputText
+        class="w-100"
+        autocomplete="email"
+        placeholder="your@email.com"
+        [formField]="registerForm.email"
+      />
+
+      @if (
+        registerForm.email().touched() &&
+        registerForm.email().invalid()
+      ) {
+        <div class="register__error">
+          @for (
+            error of registerForm.email().errors();
+            track error
+          ) {
+            <span>{{ error.message }}</span>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Password -->
+    <div class="register__field">
+      <label
+        for="password"
+        class="register__label"
+      >
+        Пароль
+      </label>
+
+      <input
+        id="password"
+        type="password"
+        pInputText
+        class="w-100"
+        autocomplete="new-password"
+        placeholder="Пароль"
+        [formField]="registerForm.password"
+      />
+
+      @if (
+        registerForm.password().touched() &&
+        registerForm.password().invalid()
+      ) {
+        <div class="register__error">
+          @for (
+            error of registerForm.password().errors();
+            track error
+          ) {
+            <span>{{ error.message }}</span>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Confirm password -->
+    <div class="register__field">
+      <label
+        for="confirmPassword"
+        class="register__label"
+      >
+        Підтвердження пароля
+      </label>
+
+      <input
+        id="confirmPassword"
+        type="password"
+        pInputText
+        class="w-100"
+        autocomplete="new-password"
+        placeholder="Повторіть пароль"
+        [formField]="registerForm.confirmPassword"
+      />
+
+      @if (
+        registerForm.confirmPassword().touched() &&
+        registerForm.confirmPassword().invalid()
+      ) {
+        <div class="register__error">
+          @for (
+            error of registerForm.confirmPassword().errors();
+            track error
+          ) {
+            <span>{{ error.message }}</span>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Terms -->
+    <div class="register__terms">
+      <input
+        id="acceptTerms"
+        type="checkbox"
+        [formField]="registerForm.acceptTerms"
+      />
+
+      <label for="acceptTerms">
+        Я погоджуюсь з
+        <a href="#">
+          умовами використання
+        </a>
+        та
+        <a href="#">
+          політикою конфіденційності
+        </a>
+      </label>
+    </div>
+
+    @if (
+      registerForm.acceptTerms().touched() &&
+      registerForm.acceptTerms().invalid()
+    ) {
+      <div class="register__error">
+        @for (
+          error of registerForm.acceptTerms().errors();
+          track error
+        ) {
+          <span>{{ error.message }}</span>
+        }
+      </div>
+    }
+
+    <!-- Submit -->
+    <button
+      type="submit"
+      pButton
+      class="register__submit w-100"
+      [disabled]="
+        registerForm().invalid() ||
+        registerForm().submitting()
+      "
+    >
+      @if (registerForm().submitting()) {
+        <span>Створення...</span>
+      } @else {
+        <span>Створити акаунт</span>
+      }
+    </button>
+  </form>
+
+  <!-- Login -->
+  <div class="register__login">
+    <span>
+      Вже маєте акаунт?
+    </span>
+
+    <a routerLink="../login">
+      Увійти
+    </a>
+  </div>
+</div>

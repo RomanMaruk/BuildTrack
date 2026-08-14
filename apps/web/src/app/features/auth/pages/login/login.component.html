@@ -1,0 +1,91 @@
+<div class="login">
+  <div class="login__header">
+    <h1 class="login__title">Вхід у систему</h1>
+
+    <p class="login__subtitle">Увійдіть, щоб продовжити роботу</p>
+  </div>
+
+  <form class="login__form">
+    <!-- Email -->
+    <div class="login__field">
+      <label for="email" class="login__label"> Email </label>
+
+      <input
+        id="email"
+        type="email"
+        /* pInputText */
+        class="w-100 field__input"
+        autocomplete="email"
+        placeholder="your@email.com"
+        [formField]="loginForm.email"
+      />
+
+      @if (loginForm.email().touched() && loginForm.email().invalid()) {
+        <div class="login__error">
+          @for (error of loginForm.email().errors(); track error) {
+            <span>{{ error.message }}</span>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Password -->
+    <div class="login__field">
+        <label for="password" class="login__label"> Пароль </label>
+
+        <input
+          id="password"
+          type="password"
+          /* pInputPassword */
+          class="w-100 field__input"
+          autocomplete="current-password"
+          placeholder="Введіть пароль"
+          [formField]="loginForm.password"
+        />
+      @if (loginForm.password().touched() && loginForm.password().invalid()) {
+        <div class="login__error">
+          @for (error of loginForm.password().errors(); track error) {
+            <span>{{ error.message }}</span>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Remember me -->
+    <div class="login__remember">
+      <p-checkbox
+        inputId="rememberMe"
+        [binary]="true"
+        [formField]="loginForm.rememberMe"
+      />
+
+      <label for="rememberMe"> Запам'ятати мене </label>
+    </div>
+
+    <a routerLink="../forgot-password" class="login__forgot-link">
+      Забули пароль?
+    </a>
+
+    <!-- Submit -->
+    <button
+      type="button"
+      (click)="onSubmit()"
+      pButton
+      class="login__submit w-100"
+      [disabled]="loginForm().invalid() || loginForm().submitting()"
+    >
+      @if (loginForm().submitting()) {
+        <span>Вхід...</span>
+      } @else {
+        <span>Увійти</span>
+      }
+    </button>
+  </form>
+
+  <!-- Register -->
+  <div class="login__register">
+    <span> Ще не маєте акаунту? </span>
+
+    <a routerLink="../register"> Створити акаунт </a>
+  </div>
+</div>
