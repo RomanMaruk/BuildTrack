@@ -83,6 +83,12 @@
     },
     "@nx/angular:service": {
       "type": "service"
+    },
+    "@nx/angular:resolver": {
+      "typeSeparator": "."
+    },
+    "@nx/angular:guard": {
+      "typeSeparator": "."
     }
   }
 }

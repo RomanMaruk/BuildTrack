@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-shell.component',
   imports: [],
   templateUrl: './shell.component.html',
-  styleUrl: './shell.component.css',
+  styleUrl: './shell.component.scss',
 })
 export class ShellComponent {}

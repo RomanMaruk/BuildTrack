@@ -1,10 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NxWelcome } from './nx-welcome';
 import { Test } from './services/test';
 
 @Component({
-  imports: [NxWelcome, RouterModule],
+  imports: [RouterModule],
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrl: './app.scss',
