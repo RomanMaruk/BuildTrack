@@ -1,14 +1,5 @@
 import { Component, signal } from '@angular/core';
-import {
-  form,
-  required,
-  email,
-  minLength,
-  validate,
-  submit,
-  FormField,
-  pattern,
-} from '@angular/forms/signals';
+import { form, required, email, minLength, validate, submit, FormField, pattern } from '@angular/forms/signals';
 import { RouterLink } from '@angular/router';
 import { ButtonModule } from '@openng/optimus-ui/button';
 import { CheckboxModule } from '@openng/optimus-ui/checkbox';
@@ -26,14 +17,7 @@ interface RegisterModel {
 
 @Component({
   selector: 'app-register',
-  imports: [
-    RouterLink,
-    FormField,
-    ButtonModule,
-    InputTextModule,
-    PasswordModule,
-    CheckboxModule,
-  ],
+  imports: [RouterLink, FormField, ButtonModule, InputTextModule, PasswordModule, CheckboxModule],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })

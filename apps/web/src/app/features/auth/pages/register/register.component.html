@@ -1,28 +1,16 @@
 <div class="register">
   <div class="register__header">
-    <h1 class="register__title">
-      Створення акаунта
-    </h1>
+    <h1 class="register__title">Створення акаунта</h1>
 
-    <p class="register__subtitle">
-      Створіть акаунт, щоб почати облік витрат
-    </p>
+    <p class="register__subtitle">Створіть акаунт, щоб почати облік витрат</p>
   </div>
 
-  <form
-    class="register__form"
-    (submit)="onSubmit()"
-  >
+  <form class="register__form" (submit)="onSubmit()">
     <!-- Name -->
     <div class="row g-3">
       <div class="col-6">
         <div class="register__field">
-          <label
-            for="firstName"
-            class="register__label"
-          >
-            Ім'я
-          </label>
+          <label for="firstName" class="register__label"> Ім'я </label>
 
           <input
             id="firstName"
@@ -34,15 +22,9 @@
             [formField]="registerForm.firstName"
           />
 
-          @if (
-            registerForm.firstName().touched() &&
-            registerForm.firstName().invalid()
-          ) {
+          @if (registerForm.firstName().touched() && registerForm.firstName().invalid()) {
             <div class="register__error">
-              @for (
-                error of registerForm.firstName().errors();
-                track error
-              ) {
+              @for (error of registerForm.firstName().errors(); track error) {
                 <span>{{ error.message }}</span>
               }
             </div>
@@ -53,12 +35,7 @@
       <!-- Last name -->
       <div class="col-6">
         <div class="register__field">
-          <label
-            for="lastName"
-            class="register__label"
-          >
-            Прізвище
-          </label>
+          <label for="lastName" class="register__label"> Прізвище </label>
 
           <input
             id="lastName"
@@ -70,15 +47,9 @@
             [formField]="registerForm.lastName"
           />
 
-          @if (
-            registerForm.lastName().touched() &&
-            registerForm.lastName().invalid()
-          ) {
+          @if (registerForm.lastName().touched() && registerForm.lastName().invalid()) {
             <div class="register__error">
-              @for (
-                error of registerForm.lastName().errors();
-                track error
-              ) {
+              @for (error of registerForm.lastName().errors(); track error) {
                 <span>{{ error.message }}</span>
               }
             </div>
@@ -89,12 +60,7 @@
 
     <!-- Email -->
     <div class="register__field">
-      <label
-        for="email"
-        class="register__label"
-      >
-        Email
-      </label>
+      <label for="email" class="register__label"> Email </label>
 
       <input
         id="email"
@@ -106,15 +72,9 @@
         [formField]="registerForm.email"
       />
 
-      @if (
-        registerForm.email().touched() &&
-        registerForm.email().invalid()
-      ) {
+      @if (registerForm.email().touched() && registerForm.email().invalid()) {
         <div class="register__error">
-          @for (
-            error of registerForm.email().errors();
-            track error
-          ) {
+          @for (error of registerForm.email().errors(); track error) {
             <span>{{ error.message }}</span>
           }
         </div>
@@ -123,12 +83,7 @@
 
     <!-- Password -->
     <div class="register__field">
-      <label
-        for="password"
-        class="register__label"
-      >
-        Пароль
-      </label>
+      <label for="password" class="register__label"> Пароль </label>
 
       <input
         id="password"
@@ -140,15 +95,9 @@
         [formField]="registerForm.password"
       />
 
-      @if (
-        registerForm.password().touched() &&
-        registerForm.password().invalid()
-      ) {
+      @if (registerForm.password().touched() && registerForm.password().invalid()) {
         <div class="register__error">
-          @for (
-            error of registerForm.password().errors();
-            track error
-          ) {
+          @for (error of registerForm.password().errors(); track error) {
             <span>{{ error.message }}</span>
           }
         </div>
@@ -157,12 +106,7 @@
 
     <!-- Confirm password -->
     <div class="register__field">
-      <label
-        for="confirmPassword"
-        class="register__label"
-      >
-        Підтвердження пароля
-      </label>
+      <label for="confirmPassword" class="register__label"> Підтвердження пароля </label>
 
       <input
         id="confirmPassword"
@@ -174,15 +118,9 @@
         [formField]="registerForm.confirmPassword"
       />
 
-      @if (
-        registerForm.confirmPassword().touched() &&
-        registerForm.confirmPassword().invalid()
-      ) {
+      @if (registerForm.confirmPassword().touched() && registerForm.confirmPassword().invalid()) {
         <div class="register__error">
-          @for (
-            error of registerForm.confirmPassword().errors();
-            track error
-          ) {
+          @for (error of registerForm.confirmPassword().errors(); track error) {
             <span>{{ error.message }}</span>
           }
         </div>
@@ -191,33 +129,19 @@
 
     <!-- Terms -->
     <div class="register__terms">
-      <input
-        id="acceptTerms"
-        type="checkbox"
-        [formField]="registerForm.acceptTerms"
-      />
+      <input id="acceptTerms" type="checkbox" [formField]="registerForm.acceptTerms" />
 
       <label for="acceptTerms">
         Я погоджуюсь з
-        <a href="#">
-          умовами використання
-        </a>
+        <a href="#"> умовами використання </a>
         та
-        <a href="#">
-          політикою конфіденційності
-        </a>
+        <a href="#"> політикою конфіденційності </a>
       </label>
     </div>
 
-    @if (
-      registerForm.acceptTerms().touched() &&
-      registerForm.acceptTerms().invalid()
-    ) {
+    @if (registerForm.acceptTerms().touched() && registerForm.acceptTerms().invalid()) {
       <div class="register__error">
-        @for (
-          error of registerForm.acceptTerms().errors();
-          track error
-        ) {
+        @for (error of registerForm.acceptTerms().errors(); track error) {
           <span>{{ error.message }}</span>
         }
       </div>
@@ -228,10 +152,7 @@
       type="submit"
       pButton
       class="register__submit w-100"
-      [disabled]="
-        registerForm().invalid() ||
-        registerForm().submitting()
-      "
+      [disabled]="registerForm().invalid() || registerForm().submitting()"
     >
       @if (registerForm().submitting()) {
         <span>Створення...</span>
@@ -243,12 +164,8 @@
 
   <!-- Login -->
   <div class="register__login">
-    <span>
-      Вже маєте акаунт?
-    </span>
+    <span> Вже маєте акаунт? </span>
 
-    <a routerLink="../login">
-      Увійти
-    </a>
+    <a routerLink="../login"> Увійти </a>
   </div>
 </div>

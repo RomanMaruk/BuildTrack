@@ -1,14 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import {
-  email,
-  form,
-  FormField,
-  required,
-  submit,
-  minLength,
-  pattern,
-} from '@angular/forms/signals';
+import { email, form, FormField, required, submit, minLength, pattern } from '@angular/forms/signals';
 
 import { ButtonModule } from '@openng/optimus-ui/button';
 import { InputTextModule } from '@openng/optimus-ui/inputtext';
@@ -24,14 +16,7 @@ interface LoginModel {
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [
-    RouterLink,
-    FormField,
-    ButtonModule,
-    InputTextModule,
-    PasswordModule,
-    CheckboxModule,
-  ],
+  imports: [RouterLink, FormField, ButtonModule, InputTextModule, PasswordModule, CheckboxModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
@@ -60,8 +45,6 @@ export class LoginComponent {
     pattern(schema.password, /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/, {
       message: 'Пароль повинен містити хоча б одну букву та одну цифру',
     });
-    
-  
   });
 
   async onSubmit(): Promise<void> {

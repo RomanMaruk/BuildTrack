@@ -2,7 +2,11 @@
   "name": "@build-track/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "nx run-many -t lint"
+  },
   "private": true,
   "devDependencies": {
     "@angular-devkit/core": "~22.0.4",

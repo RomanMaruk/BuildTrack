@@ -1,6 +1,5 @@
-import { Route } from "@angular/router";
-import { LayoutAuthComponent } from "./components/layout-auth/layout-auth.component";
-
+import { Route } from '@angular/router';
+import { LayoutAuthComponent } from './components/layout-auth/layout-auth.component';
 
 export const authRoutes: Route[] = [
   {
@@ -14,20 +13,15 @@ export const authRoutes: Route[] = [
       },
       {
         path: 'login',
-        loadComponent: () =>
-          import('./pages/login/login.component').then((m) => m.LoginComponent),
+        loadComponent: () => import('./pages/login/login.component').then((m) => m.LoginComponent),
       },
       {
         path: 'register',
-        loadComponent: () =>
-          import('./pages/register/register.component').then((m) => m.RegisterComponent),
+        loadComponent: () => import('./pages/register/register.component').then((m) => m.RegisterComponent),
       },
       {
         path: 'forgot-password',
-        loadComponent: () =>
-          import('./pages/forgot-password/forgot-password').then(
-            (m) => m.ForgotPassword,
-          ),
+        loadComponent: () => import('./pages/forgot-password/forgot-password').then((m) => m.ForgotPassword),
       },
     ],
   },

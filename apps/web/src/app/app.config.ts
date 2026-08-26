@@ -10,8 +10,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(appRoutes),
     provideOptimus({
       theme: {
-        preset: Aura
-      }
-    })
-  ]
+        preset: Aura,
+      },
+    }),
+  ],
 };

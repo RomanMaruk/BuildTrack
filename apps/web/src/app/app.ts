@@ -11,8 +11,7 @@ import { Test } from './services/test';
 export class App {
   protected title = 'web';
 
-  private test  = inject(Test);
+  private test = inject(Test);
 
-  ngOnInit() { 
-  }
+  ngOnInit() {}
 }
