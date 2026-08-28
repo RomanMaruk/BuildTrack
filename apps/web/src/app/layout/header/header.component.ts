@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+import type { IUser } from '@build-track/types';
 
 @Component({
-  selector: 'app-header.component',
+  selector: 'app-header',
   imports: [],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+  public user = input.required<IUser>();
+}

@@ -1,1 +1,11 @@
-<p>shell.component works!</p>
+<app-header
+  [user]="user$ | async" />
+
+<div class="card">
+    <div class="side-bar">
+        <app-sidebar/>
+    </div>
+    <main class="content">
+        <router-outlet></router-outlet>
+    </main>
+</div>
