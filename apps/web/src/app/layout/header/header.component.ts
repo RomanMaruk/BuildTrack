@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import type { IUser } from '@build-track/types';
+import type { IUserRegister } from '@build-track/types';
 
 @Component({
   selector: 'app-header',
@@ -8,5 +8,5 @@ import type { IUser } from '@build-track/types';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  public user = input.required<IUser>();
+  public user = input.required<IUserRegister>();
 }

@@ -1,4 +1,4 @@
-import { IsEmail, IsIn, IsInt, IsNotEmpty, IsString, MinLength } from 'class-validator';
+import { IsBase64, IsEmail, IsIn, IsInt, IsNotEmpty, IsString, MinLength } from 'class-validator';
 import { UserRoleType, DEFAULT_USER_ROLE, USER_ROLES } from '@build-track/types';
 
 export class RegisterDto {

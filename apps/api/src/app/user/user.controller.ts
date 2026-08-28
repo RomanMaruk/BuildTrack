@@ -27,6 +27,8 @@ export class UserController {
     return this.userService.update(id, updateUserDto);
   }
 
+  // TODO: Implement find by some unique identifier (e.g., email, firstName, lastName...) if needed
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.userService.remove(id);

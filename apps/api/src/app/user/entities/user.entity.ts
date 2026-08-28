@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { UserRoleType, USER_ROLES, DEFAULT_USER_ROLE } from '@build-track/types';
 
 @Entity({ name: 'users' })
@@ -23,4 +23,13 @@ export class User {
 
   @Column({ type: 'enum', enum: USER_ROLES, default: DEFAULT_USER_ROLE })
   role: UserRoleType;
+
+  @Column({ nullable: true })
+  img: string;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 }

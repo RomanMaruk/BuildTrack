@@ -6,6 +6,10 @@
   </div>
 
   <form class="login__form">
+    @if (errorMessage()) {
+      <div class="login__error">{{ errorMessage() }}</div>
+    }
+
     <!-- Email -->
     <div class="login__field">
       <label for="email" class="login__label"> Email </label>

@@ -1,5 +1,6 @@
-<app-header
-  [user]="user$ | async" />
+@if (authService.currentUser(); as user) {
+  <app-header [user]="user" />
+}
 
 <div class="card">
     <div class="side-bar">
