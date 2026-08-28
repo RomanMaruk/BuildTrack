@@ -1,4 +1,5 @@
-import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
+import { IsEmail, IsIn, IsInt, IsNotEmpty, IsString, MinLength } from 'class-validator';
+import { UserRoleType, DEFAULT_USER_ROLE, USER_ROLES } from '@build-track/types';
 
 export class RegisterDto {
   @IsString()
@@ -21,7 +22,7 @@ export class RegisterDto {
   @MinLength(6)
   password: string;
 
-  @IsString()
+  @IsIn(USER_ROLES)
   @IsNotEmpty()
-  role: 'user' | 'admin' | 'manager' | 'supervisor'  | 'accountant' = 'user';
+  role: UserRoleType = DEFAULT_USER_ROLE;
 }
