@@ -1,4 +1,4 @@
-import { IsBase64, IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsOptional, IsString, MinLength, IsBase64 } from 'class-validator';
 
 export class CreateUserDto {
   @IsString()
@@ -21,7 +21,7 @@ export class CreateUserDto {
   @MinLength(6)
   password: string;
 
-  @IsString()
+  @IsOptional()
   @IsBase64()
   img?: string | null;
 }
