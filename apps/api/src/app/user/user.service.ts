@@ -1,5 +1,5 @@
 import { IUserData } from '@build-track/types';
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
@@ -12,18 +12,17 @@ export class UserService {
   constructor(@InjectRepository(User) private readonly userRepository: Repository<User>) {}
 
   async create(createUserDto: CreateUserDto): Promise<IUserData> {
-    try {
-      const passwordHash = await bcrypt.hash(createUserDto.password, 10);
-      const user = this.userRepository.create({
-        ...createUserDto,
-        password: passwordHash,
-      });
-
-      return this.userRepository.save(user);
-    } catch (error) {
-      console.log('Error creating user:', error);
-      throw new Error(`Failed to create user: ${error.message}`);
+    const existingUser = await this.findByEmail(createUserDto.email);
+    if (existingUser) {
+      throw new ConflictException('User with this email already exists');
     }
+    const passwordHash = await bcrypt.hash(createUserDto.password, 10);
+    const user = this.userRepository.create({
+      ...createUserDto,
+      password: passwordHash,
+    });
+
+    return this.userRepository.save(user);
   }
 
   async findAll() {
@@ -56,9 +55,9 @@ export class UserService {
     }
 
     const user = await this.userRepository.find({ where: { ...obj } });
-    console.log('findByProperty result:', user);
     if (!user || user.length === 0) {
-      throw new Error(`No users found with properties: ${JSON.stringify(obj)}`);
+      throw new NotFoundException(`No users found with properties: ${JSON.stringify(obj)}`);
+      // throw new BadRequestException(`No users found with properties: ${JSON.stringify(obj)}`);
     }
     return user;
   }
@@ -67,7 +66,7 @@ export class UserService {
     const user = await this.findOne(id);
 
     if (!user) {
-      throw new Error(`User with id ${id} not found`);
+      throw new NotFoundException(`User with id ${id} not found`);
     }
 
     await this.userRepository.remove(user);
