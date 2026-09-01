@@ -23,5 +23,5 @@ export class CreateUserDto {
 
   @IsString()
   @IsBase64()
-  img?: string;
+  img?: string | null;
 }

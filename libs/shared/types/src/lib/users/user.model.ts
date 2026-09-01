@@ -5,8 +5,9 @@ export interface IUserRegister {
   lastName: string;
   address: string;
   email: string;
-  role: UserRoleType;
-  img?: string;
+  password: string;
+  role?: UserRoleType;
+  img?: string | null;
 }
 
 export interface IUserLogin {

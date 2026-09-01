@@ -6,7 +6,7 @@
   </div>
 
   <!-- <form class="register__form" (submit)="onSubmit()"> -->
-  <form class="register__form" (submit)="onSubmit()">
+  <form class="register__form">
     <!-- Name -->
     <div class="row g-3">
       <div class="col-6">
@@ -82,6 +82,29 @@
       }
     </div>
 
+    <!-- address -->
+    <div class="register__field">
+      <label for="address" class="register__label"> Адреса </label>
+
+      <input
+        id="address"
+        type="text"
+        pInputText
+        class="w-100"
+        autocomplete="street-address"
+        placeholder="Ваша адреса"
+        [formField]="registerForm.address"
+      />
+
+      @if (registerForm.address().touched() && registerForm.address().invalid()) {
+        <div class="register__error">
+          @for (error of registerForm.address().errors(); track error) {
+            <span>{{ error.message }}</span>
+          }
+        </div>
+      }
+    </div>
+
     <!-- Password -->
     <div class="register__field">
       <label for="password" class="register__label"> Пароль </label>
@@ -148,9 +171,16 @@
       </div>
     }
 
+
+    @if (errorMessage()) {
+      <div class="register__error">
+        <span>{{ errorMessage() }}</span>
+      </div>
+    }
     <!-- Submit -->
     <button
-      type="submit"
+      type="button"
+      (click)="onSubmit()"
       pButton
       class="register__submit w-100"
       [disabled]="registerForm().invalid() || registerForm().submitting()"

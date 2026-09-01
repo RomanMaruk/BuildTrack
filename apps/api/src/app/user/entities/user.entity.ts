@@ -24,8 +24,8 @@ export class User {
   @Column({ type: 'enum', enum: USER_ROLES, default: DEFAULT_USER_ROLE })
   role: UserRoleType;
 
-  @Column({ nullable: true })
-  img: string;
+  @Column({ type: 'varchar', nullable: true })
+  img: string | null;
 
   @CreateDateColumn()
   createdAt: Date;

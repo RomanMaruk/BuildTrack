@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { UserService } from './user.service';
+import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { UserService } from './user.service';
+import { STATUS_CODES } from 'http';
 
 @Controller('user')
 export class UserController {
@@ -13,8 +14,8 @@ export class UserController {
   }
 
   @Get()
-  findAll() {
-    return this.userService.findAll();
+  async findAll() {
+    return await this.userService.findAll();
   }
 
   @Get(':id')
@@ -27,7 +28,11 @@ export class UserController {
     return this.userService.update(id, updateUserDto);
   }
 
-  // TODO: Implement find by some unique identifier (e.g., email, firstName, lastName...) if needed
+  @Post('filteredUsers')
+  @HttpCode(200)
+  findByProperty(@Body() body: { [key: string]: string }) {
+    return this.userService.findByProperty(body);
+  }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
