@@ -9,6 +9,7 @@ out-tsc
 .agents
 .claude
 .windsurf
+.github
 
 
 # dependencies

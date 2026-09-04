@@ -1,1 +1,73 @@
-<p>sidebar.component works!</p>
+@if (sidebarState.mobileOpen()) {
+  <button
+    type="button"
+    class="sidebar-backdrop d-lg-none"
+    aria-label="Закрити меню"
+    (click)="close()"
+  ></button>
+}
+
+<aside
+  class="sidebar"
+  [class.sidebar--open]="sidebarState.mobileOpen()"
+  [class.sidebar--collapsed]="sidebarState.collapsed()"
+  aria-label="Основна навігація"
+>
+  <div class="sidebar__brand">
+    <a routerLink="/app" class="sidebar__brand-link" (click)="close()">
+      <span class="sidebar__brand-mark" aria-hidden="true">&#8962;</span>
+      <span class="sidebar__brand-text">BuildTrack</span>
+    </a>
+    <button
+      type="button"
+      pButton
+      class="sidebar__close d-lg-none"
+      aria-label="Закрити меню"
+      (click)="close()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <nav class="sidebar__nav">
+    <a routerLink="/app" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+       class="sidebar__link" title="Дашборд" (click)="close()">
+      <span class="sidebar__icon" aria-hidden="true">&#8962;</span>
+      <span class="sidebar__label">Дашборд</span>
+    </a>
+    <a routerLink="/app" class="sidebar__link" title="Витрати" (click)="close()">
+      <span class="sidebar__icon" aria-hidden="true">&#9633;</span>
+      <span class="sidebar__label">Витрати</span>
+    </a>
+    <a routerLink="/app" class="sidebar__link" title="Категорії" (click)="close()">
+      <span class="sidebar__icon" aria-hidden="true">&#9638;</span>
+      <span class="sidebar__label">Категорії</span>
+    </a>
+    <a routerLink="/app" class="sidebar__link" title="Курси валют" (click)="close()">
+      <span class="sidebar__icon" aria-hidden="true">&#9733;</span>
+      <span class="sidebar__label">Курси валют</span>
+    </a>
+    <a routerLink="/app" class="sidebar__link" title="Звіти" (click)="close()">
+      <span class="sidebar__icon" aria-hidden="true">&#9636;</span>
+      <span class="sidebar__label">Звіти</span>
+    </a>
+    <a routerLink="/app" class="sidebar__link" title="Імпорт / Експорт" (click)="close()">
+      <span class="sidebar__icon" aria-hidden="true">&#8644;</span>
+      <span class="sidebar__label">Імпорт / Експорт</span>
+    </a>
+    <a routerLink="/app" class="sidebar__link" title="Налаштування" (click)="close()">
+      <span class="sidebar__icon" aria-hidden="true">&#9881;</span>
+      <span class="sidebar__label">Налаштування</span>
+    </a>
+  </nav>
+
+  <div class="sidebar__profile">
+    <span class="sidebar__avatar" aria-hidden="true">&#9679;</span>
+    <span class="sidebar__user">
+      <strong>Роман Марчук</strong>
+      <small>Вийти</small>
+    </span>
+    <button type="button" pButton class="sidebar__logout" aria-label="Вийти">&#10132;</button>
+  </div>
+</aside>
+

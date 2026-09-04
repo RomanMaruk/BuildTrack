@@ -1,1 +1,49 @@
-<p>header.component works!</p>
+<header class="app-header">
+  <button
+    type="button"
+    pButton
+    class="app-header__menu d-lg-none"
+    aria-label="Меню"
+    [attr.aria-expanded]="sidebarState.mobileOpen()"
+    (click)="sidebarState.toggleMobileOpen()"
+  >
+    <span aria-hidden="true">&#9776;</span>
+  </button>
+
+    <button
+      type="button"
+      pButton
+      class="app-header__icon-btn app-header__collapse-btn d-none d-lg-inline-flex"
+      [attr.aria-pressed]="sidebarState.collapsed()"
+      [attr.aria-label]="sidebarState.collapsed() ? 'Розгорнути меню' : 'Згорнути меню'"
+      (click)="toggleSidebarCollapsed()"
+    >
+      <span aria-hidden="true">&#9776;</span>
+    </button>
+
+  <span class="app-header__title">
+    <a routerLink="/app">
+      <img src="assets/Logo.png" alt="BuildTrack Logo" class="app-header__logo" />
+    </a>
+  </span>
+
+  <div class="app-header__actions">
+    <button type="button" class="app-header__icon-btn" aria-label="Сповіщення">
+      <span aria-hidden="true">&#128276;</span>
+      <span class="app-header__badge">1</span>
+    </button>
+
+    <button type="button" class="app-header__icon-btn" aria-label="Тема">
+      <span aria-hidden="true">&#127769;</span>
+    </button>
+
+    <button
+      type="button"
+      pButton
+      class="app-header__icon-btn d-lg-inline-flex"
+    >
+      <span aria-hidden="true">&#9673;</span>
+    </button>
+  </div>
+</header>
+
