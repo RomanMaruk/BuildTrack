@@ -7,7 +7,7 @@
     "format:check": "prettier --check .",
     "lint": "nx run-many -t lint",
     "api": "nx run api:serve",
-    "web": "nx run web:serve"
+    "web": "nx run web:serve -o"
   },
   "private": true,
   "devDependencies": {

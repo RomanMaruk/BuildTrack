@@ -1,0 +1,51 @@
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+  @media (max-width: 1150px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 576px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.dashboard-components {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1rem; /* Space between cards */
+  grid-template-rows: repeat(2, 1fr);
+  // min-height: 75dvh; /* Adjust as needed */
+  /* Row 1 */
+  .expense-by-category {
+    grid-column: span 5; /* ~40% width */
+  }
+
+  .expense-trend {
+    grid-column: span 7; /* ~60% width */
+  }
+
+  /* Row 2 */
+  .recent-expenses {
+    grid-column: span 8; /* ~66% width */
+  }
+
+  .quick-actions {
+    grid-column: span 4; /* ~33% width */
+  }
+  @media (max-width: 1024px) {
+    min-height: auto;
+    overflow-y: auto;
+    .expense-by-category,
+    .expense-trend,
+    .recent-expenses,
+    .quick-actions {
+      grid-column: span 12;
+    }
+    .quick-actions {
+      grid-row: 1;
+    }
+  }
+}

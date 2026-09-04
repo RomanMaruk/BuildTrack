@@ -8,7 +8,7 @@
     [dateFormat]="'dd-mm-yy'"
   />
 </div>
-<div class="dashboard-cards">
+<section class="dashboard-cards">
   <app-card-amount
     title="Всього витрачено"
     mainAmount="4 231 000 грн"
@@ -37,4 +37,19 @@
     icon="pi-shopping-cart"
     variant="orange"
   ></app-card-amount>
-</div>
+</section>
+
+<section class="dashboard-components">
+  <div class="dashboard-components-item expense-by-category">
+    <app-expense-by-category />
+  </div>
+  <div class="dashboard-components-item expense-trend">
+    <app-expense-trend />
+  </div>
+  <div class="dashboard-components-item recent-expenses">
+    <app-recent-expenses />
+  </div>
+  <div class="dashboard-components-item quick-actions">
+    <app-quick-actions />
+  </div>
+</section>

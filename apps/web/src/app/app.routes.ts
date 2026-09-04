@@ -2,7 +2,7 @@ import { Route } from '@angular/router';
 import { authRoutes } from './features/auth/auth.routes';
 import { ShellComponent } from './layout/shell/shell.component';
 import { authGuard } from './features/auth/guards/auth.guard';
-import { DashboardComponent } from './features/dashboard/pages/dashboard/dashboard.component';
+import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { ExpensesComponent } from './features/expenses/pages/expenses/expenses.component';
 import { CategoriesComponent } from './features/categories/pages/categories/categories.component';
 import { ExchangeRatesComponent } from './features/exchange-rates/pages/exchange-rates/exchange-rates.component';
@@ -35,3 +35,16 @@ export const appRoutes: Route[] = [
     redirectTo: 'app',
   },
 ];
+
+// dashboard/
+// ├── dashboard.component.ts
+// ├── dashboard.component.html
+// └── components/
+//     ├── expense-by-category/
+//     │   └── expense-by-category.component.ts
+//     ├── expense-trend/
+//     │   └── expense-trend.component.ts
+//     ├── recent-expenses/
+//     │   └── recent-expenses.component.ts
+//     └── quick-actions/
+//         └── quick-actions.component.ts
