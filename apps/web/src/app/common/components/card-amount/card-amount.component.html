@@ -1,0 +1,14 @@
+<div class="card card-amount">
+  <div class="card-body d-flex justify-content-between">
+    <div class="card-amount__info">
+      <h5 class="card-amount__title">{{ title() }}</h5>
+      <p class="card-amount__main">{{ mainAmount() }}</p>
+      @if (secondaryAmount()) {
+        <p class="card-amount__secondary">{{ secondaryAmount() }}</p>
+      }
+    </div>
+    <div class="card-amount__icon card-amount__icon--{{ variant() }}">
+      <i class="pi {{ icon() }}"></i>
+    </div>
+  </div>
+</div>

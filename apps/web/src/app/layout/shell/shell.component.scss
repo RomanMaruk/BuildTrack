@@ -1,4 +1,4 @@
-.card {
+.shell-layout {
   display: flex;
   height: calc(100vh - 3.5rem - 2rem);
   min-height: calc(100vh - 3.5rem - 2rem);
@@ -17,7 +17,7 @@
 }
 
 @media (max-width: 991.98px) {
-  .card {
+  .shell-layout {
     display: block;
     margin: 0;
     height: calc(100vh - 3.5rem);

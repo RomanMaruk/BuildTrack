@@ -2,9 +2,23 @@
 @use 'bootstrap/scss/bootstrap';
 @import '@openng/icons/openng-icons.css';
 
+:root {
+  --shadow-card: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+  --sidebar-bg: #10264c;
+}
+
 html,
 body {
   height: 100%;
   margin: 0;
   font-family: Inter, sans-serif;
+  background-color: #f3f7fc;
+}
+
+.shadow {
+  box-shadow: var(--shadow-card);
+}
+.card {
+  border-color: transparent;
+  box-shadow: var(--shadow-card);
 }

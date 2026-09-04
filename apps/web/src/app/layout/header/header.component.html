@@ -1,4 +1,4 @@
-<header class="app-header">
+<header class="app-header shadow">
   <button
     type="button"
     pButton
@@ -10,16 +10,16 @@
     <span aria-hidden="true">&#9776;</span>
   </button>
 
-    <button
-      type="button"
-      pButton
-      class="app-header__icon-btn app-header__collapse-btn d-none d-lg-inline-flex"
-      [attr.aria-pressed]="sidebarState.collapsed()"
-      [attr.aria-label]="sidebarState.collapsed() ? 'Розгорнути меню' : 'Згорнути меню'"
-      (click)="toggleSidebarCollapsed()"
-    >
-      <span aria-hidden="true">&#9776;</span>
-    </button>
+  <button
+    type="button"
+    pButton
+    class="app-header__icon-btn app-header__collapse-btn d-none d-lg-inline-flex"
+    [attr.aria-pressed]="sidebarState.collapsed()"
+    [attr.aria-label]="sidebarState.collapsed() ? 'Розгорнути меню' : 'Згорнути меню'"
+    (click)="toggleSidebarCollapsed()"
+  >
+    <span aria-hidden="true">&#9776;</span>
+  </button>
 
   <span class="app-header__title">
     <a routerLink="/app">
@@ -37,13 +37,8 @@
       <span aria-hidden="true">&#127769;</span>
     </button>
 
-    <button
-      type="button"
-      pButton
-      class="app-header__icon-btn d-lg-inline-flex"
-    >
+    <button type="button" pButton class="app-header__icon-btn d-lg-inline-flex">
       <span aria-hidden="true">&#9673;</span>
     </button>
   </div>
 </header>
-
