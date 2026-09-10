@@ -11,6 +11,6 @@ import { ProjectMember } from './entities/project-member.entity';
   imports: [TypeOrmModule.forFeature([Project, ProjectMember]), UserModule],
   controllers: [ProjectController],
   providers: [ProjectService, ProjectRolesGuard],
-  exports: [ProjectService],
+  exports: [ProjectService, ProjectRolesGuard],
 })
 export class ProjectModule {}

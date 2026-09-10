@@ -4,3 +4,8 @@ export * from './lib/auth/auth.model';
 export * from './lib/projects/project-role.model';
 export * from './lib/projects/project.model';
 export * from './lib/categories/category.model';
+export * from './lib/suppliers/supplier.model';
+export * from './lib/exchange-rates/exchange-rate.model';
+export * from './lib/enums/currency-code.enum';
+export * from './lib/enums/expense-unit.enum';
+export * from './lib/expenses/expense.model';

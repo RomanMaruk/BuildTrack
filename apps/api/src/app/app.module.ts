@@ -8,6 +8,9 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { ProjectModule } from './project/project.module';
 import { CategoryModule } from './category/category.module';
+import { SupplierModule } from './supplier/supplier.module';
+import { ExchangeRateModule } from './exchange-rate/exchange-rate.module';
+import { ExpenseModule } from './expense/expense.module';
 
 @Module({
   imports: [
@@ -21,6 +24,9 @@ import { CategoryModule } from './category/category.module';
     AuthModule,
     ProjectModule,
     CategoryModule,
+    SupplierModule,
+    ExchangeRateModule,
+    ExpenseModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -39,6 +39,13 @@ export class CategoryService {
       await this.assertOwnedParent(dto.parentId, ownerId);
     }
 
+    const existingCategory = await this.categoryRepository.findOne({
+      where: { ownerId, name: dto.name },
+    });
+    if (existingCategory) {
+      throw new ConflictException('A category with this name already exists for this owner');
+    }
+
     return this.categoryRepository.save(this.categoryRepository.create({ ...dto, ownerId }));
   }
 
@@ -60,6 +67,15 @@ export class CategoryService {
     if (dto.parentId) {
       await this.assertOwnedParent(dto.parentId, ownerId);
       await this.assertNoCycle(id, dto.parentId);
+    }
+
+    if (dto.name) {
+      const existingCategory = await this.categoryRepository.findOne({
+        where: { ownerId, name: dto.name },
+      });
+      if (existingCategory && existingCategory.id !== id) {
+        throw new ConflictException('A category with this name already exists for this owner');
+      }
     }
 
     await this.categoryRepository.update(id, dto);
