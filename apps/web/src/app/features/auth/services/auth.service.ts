@@ -2,13 +2,14 @@ import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { IAuthResponse, IUserData, IUserRegister, ILoginCredentials } from '@build-track/types';
+import { environment } from '../../../../environments/environment';
 
 const TOKEN_KEY = 'buildtrack_access_token';
 const USER_KEY = 'buildtrack_user';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly baseUrl = 'http://localhost:3000';
+  private readonly baseUrl = environment.apiUrl;
   private readonly apiUrl = '/api/auth';
   readonly currentUser = signal<IUserData | null>(null);
 
@@ -22,15 +23,15 @@ export class AuthService {
   login(credentials: ILoginCredentials): Observable<IAuthResponse> {
     const { rememberMe, ...payload } = credentials;
 
-    return this.http.post<IAuthResponse>(`${this.baseUrl}${this.apiUrl}/login`, payload).pipe(
-      tap((response) => this.saveAuth(response, rememberMe === true)),
-    );
+    return this.http
+      .post<IAuthResponse>(`${this.baseUrl}${this.apiUrl}/login`, payload)
+      .pipe(tap((response) => this.saveAuth(response, rememberMe === true)));
   }
 
   register(data: IUserRegister): Observable<IAuthResponse> {
-    return this.http.post<IAuthResponse>(`${this.baseUrl}${this.apiUrl}/register`, data).pipe(
-      tap((response) => this.saveAuth(response, true)),
-    );
+    return this.http
+      .post<IAuthResponse>(`${this.baseUrl}${this.apiUrl}/register`, data)
+      .pipe(tap((response) => this.saveAuth(response, true)));
   }
 
   logout(): void {

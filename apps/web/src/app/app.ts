@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { Test } from './services/test';
 
 @Component({
   imports: [RouterModule],
@@ -10,8 +9,4 @@ import { Test } from './services/test';
 })
 export class App {
   protected title = 'web';
-
-  private test = inject(Test);
-
-  ngOnInit() {}
 }
