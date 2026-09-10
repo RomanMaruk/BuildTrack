@@ -1,15 +1,14 @@
-import { BadRequestException, Body, Controller, Delete, Get, Param, Patch, Post, Req, UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import type { Request } from 'express';
-import { ProjectRolesGuard } from './guards/project-roles.guard';
-import { ProjectRoles } from './decorators/project-roles.decorator';
-import { ProjectService } from './project.service';
-import { CreateProjectDto } from './dto/create-project.dto';
-import { UpdateProjectDto } from './dto/update-project.dto';
-import { AddMemberDto } from './dto/add-member.dto';
-import { UpdateMemberRoleDto } from './dto/update-member-role.dto';
-import { AuthRequest, AuthUser } from '../auth/types/auth-user';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { AuthUser } from '../auth/types/auth-user';
+import { ProjectRoles } from './decorators/project-roles.decorator';
+import { AddMemberDto } from './dto/add-member.dto';
+import { CreateProjectDto } from './dto/create-project.dto';
+import { UpdateMemberRoleDto } from './dto/update-member-role.dto';
+import { UpdateProjectDto } from './dto/update-project.dto';
+import { ProjectRolesGuard } from './guards/project-roles.guard';
+import { ProjectService } from './project.service';
 
 @UseGuards(JwtAuthGuard)
 @Controller('project')

@@ -1,0 +1,65 @@
+@if (userProjects$ | async; as userProjects) {
+  <fieldset class="">
+    <div class="row mb-1 col-md-6">
+      <label class="form-label" for="projectName">Project Name</label>
+      <input id="projectName" type="text" [formField]="form.name" />
+    </div>
+
+    <div class="row mb-3 col-md-6">
+      <label class="form-label" for="projectBaseCurrency">Base Currency</label>
+      <select id="projectBaseCurrency" [formField]="form.baseCurrency">
+        @for (currency of currencies; track currency) {
+          <option [value]="currency">{{ currency }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="row mb-3 col-md-6">
+      <label class="form-label" for="projectAddress">Address</label>
+      <input id="projectAddress" type="text" [formField]="form.address" />
+    </div>
+  </fieldset>
+
+  <button type="button" class="btn btn-primary mb-3" (click)="createProject()">Add Project</button>
+
+  @for (item of userProjects; track item.id) {
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">{{ item.name }}</h5>
+        <p class="card-text">{{ item.address }}</p>
+        <button type="button" class="btn btn-danger btn-sm float-end" (click)="deleteProject(item.id)">
+          Delete Project
+        </button>
+      </div>
+    </div>
+  } @empty {
+    <p>No projects found.</p>
+
+    <p>Please add some projects to get started.</p>
+
+    <fieldset class="">
+      <div class="row mb-1 col-md-6">
+        <label class="form-label" for="projectName">Project Name</label>
+        <input id="projectName" type="text" [formField]="form.name" />
+      </div>
+
+      <div class="row mb-3 col-md-6">
+        <label class="form-label" for="projectBaseCurrency">Base Currency</label>
+        <select id="projectBaseCurrency" [formField]="form.baseCurrency">
+          @for (currency of currencies; track currency) {
+            <option [value]="currency">{{ currency }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="row mb-3 col-md-6">
+        <label class="form-label" for="projectAddress">Address</label>
+        <input id="projectAddress" type="text" [formField]="form.address" />
+      </div>
+    </fieldset>
+
+    <button type="button" class="btn btn-primary" (click)="createProject()">Add Project</button>
+  }
+} @else {
+  <p>Projects is loading...</p>
+}

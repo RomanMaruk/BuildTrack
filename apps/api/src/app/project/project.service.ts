@@ -27,7 +27,7 @@ export class ProjectService {
     return project;
   }
 
-  async findAllForUser(userId: string) {
+  async findAllForUser(userId: string): Promise<Project[]> {
     return this.projectRepository
       .createQueryBuilder('project')
       .innerJoin(ProjectMember, 'member', 'member.projectId = project.id')

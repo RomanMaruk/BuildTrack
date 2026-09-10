@@ -1,9 +1,10 @@
+import { CurrencyCodeType } from '../enums/currency-code.enum';
 import { ProjectRoleType } from './project-role.model';
 
 export interface ICreateProject {
   name: string;
-  address: string;
-  baseCurrency: string;
+  address?: string;
+  baseCurrency: CurrencyCodeType;
 }
 
 export interface IProjectData extends ICreateProject {

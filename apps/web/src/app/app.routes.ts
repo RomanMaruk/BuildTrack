@@ -8,6 +8,7 @@ import { CategoriesComponent } from './features/categories/pages/categories/cate
 import { ExchangeRatesComponent } from './features/exchange-rates/pages/exchange-rates/exchange-rates.component';
 import { ReportsComponent } from './features/reports/pages/reports/reports.component';
 import { ImportExportComponent } from './features/import-export/pages/import-export/import-export.component';
+import { ProjectComponent } from './features/projects/project.component';
 
 export const appRoutes: Route[] = [
   {
@@ -28,6 +29,11 @@ export const appRoutes: Route[] = [
       { path: 'exchange-rates', component: ExchangeRatesComponent },
       { path: 'reports', component: ReportsComponent },
       { path: 'import-export', component: ImportExportComponent },
+      {
+        path: 'projects',
+        component: ProjectComponent,
+        // loadComponent: () => import('./features/projects/project.component').then((m) => m.ProjectComponent),
+      },
     ],
   },
   {
@@ -35,16 +41,3 @@ export const appRoutes: Route[] = [
     redirectTo: 'app',
   },
 ];
-
-// dashboard/
-// ├── dashboard.component.ts
-// ├── dashboard.component.html
-// └── components/
-//     ├── expense-by-category/
-//     │   └── expense-by-category.component.ts
-//     ├── expense-trend/
-//     │   └── expense-trend.component.ts
-//     ├── recent-expenses/
-//     │   └── recent-expenses.component.ts
-//     └── quick-actions/
-//         └── quick-actions.component.ts

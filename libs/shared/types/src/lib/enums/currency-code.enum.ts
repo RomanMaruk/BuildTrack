@@ -5,3 +5,5 @@ export enum CurrencyCode {
 }
 
 export const CURRENCY_CODES = Object.values(CurrencyCode);
+
+export type CurrencyCodeType = keyof typeof CurrencyCode;
