@@ -2,8 +2,10 @@ import { Component, inject, signal } from '@angular/core';
 import { ApiProjectsService } from './services/api-projects.service';
 import { shareReplay, startWith, Subject, switchMap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-import { CURRENCY_CODES, ICreateProject } from '@build-track/types';
+import { CURRENCY_CODES, ICreateProject, IProjectData } from '@build-track/types';
 import { form, required, FormField } from '@angular/forms/signals';
+import { StoreProjectsService } from './services/store-projects.service';
+import { Router } from '@angular/router';
 
 const initialProjectForm = (): Required<ICreateProject> => ({
   name: '',
@@ -21,6 +23,9 @@ export class ProjectComponent {
   private readonly refreshProjects$ = new Subject<void>();
 
   private readonly apiProjectsService = inject(ApiProjectsService);
+  private readonly router = inject(Router);
+  private readonly storeProject = inject(StoreProjectsService);
+
   public readonly userProjects$ = this.refreshProjects$.pipe(
     startWith(void 0),
     switchMap(() => this.apiProjectsService.getUserProjects().pipe(shareReplay())),
@@ -75,6 +80,12 @@ export class ProjectComponent {
         console.error('Error creating project:', err);
       },
     });
+  }
+
+  public selectProject(project: IProjectData): void {
+    console.log('Project selected:', project);
+    this.storeProject.setSelectedProject(project);
+    this.router.navigate(['/dashboard']);
   }
 
   deleteProject(projectId: string): void {

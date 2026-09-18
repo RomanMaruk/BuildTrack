@@ -9,7 +9,7 @@ import { CreateExpenseDto } from './dto/create-expense.dto';
 import { UpdateExpenseDto } from './dto/update-expense.dto';
 
 @UseGuards(JwtAuthGuard, ProjectRolesGuard)
-@Controller('project/:projectId/expenses')
+@Controller('project/expenses/:projectId')
 export class ExpenseController {
   constructor(private readonly expenseService: ExpenseService) {}
 

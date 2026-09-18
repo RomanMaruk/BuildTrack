@@ -1,5 +1,14 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { User } from '../../user/entities/user.entity';
+import { CurrencyCode, CurrencyCodeType } from '@build-track/types';
 
 @Entity({ name: 'projects' })
 export class Project {
@@ -19,7 +28,9 @@ export class Project {
   @Column()
   address: string;
 
+  // @Column({ type: 'enum', enum: CurrencyCode })
   @Column()
+  // baseCurrency: CurrencyCodeType;
   baseCurrency: string;
 
   @Column({ default: 'active' })

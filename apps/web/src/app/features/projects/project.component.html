@@ -22,12 +22,12 @@
 
   <button type="button" class="btn btn-primary mb-3" (click)="createProject()">Add Project</button>
 
-  @for (item of userProjects; track item.id) {
-    <div class="card mb-3">
+  @for (project of userProjects; track project.id) {
+    <div class="card mb-3" (click)="selectProject(project)">
       <div class="card-body">
-        <h5 class="card-title">{{ item.name }}</h5>
-        <p class="card-text">{{ item.address }}</p>
-        <button type="button" class="btn btn-danger btn-sm float-end" (click)="deleteProject(item.id)">
+        <h5 class="card-title">{{ project.name }}</h5>
+        <p class="card-text">{{ project.address }}</p>
+        <button type="button" class="btn btn-danger btn-sm float-end" (click)="deleteProject(project.id)">
           Delete Project
         </button>
       </div>
