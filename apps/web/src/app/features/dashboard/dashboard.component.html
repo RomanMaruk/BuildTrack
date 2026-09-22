@@ -1,5 +1,11 @@
 @let dashboardData = dashboardData$ | async;
 
+@if (dashboardData?.error) {
+  <div class="alert alert-danger position-fixed bottom-0 start-50 translate-middle-x">
+    <p class="text-danger">Error fetching dashboard data: {{ dashboardData.error.message }}</p>
+  </div>
+}
+
 <div class="d-flex justify-content-between align-items-center">
   <h2 class="title mb-4">Dashboard</h2>
   <p-datepicker

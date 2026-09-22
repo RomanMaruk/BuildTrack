@@ -5,6 +5,8 @@ import { appRoutes } from './app.routes';
 import { authInterceptor, errorInterceptor } from './features/auth/interceptors/auth.interceptor';
 import { provideOptimus } from '@openng/optimus-ui/config';
 import Aura from '@openng/optimus-ui-themes/aura';
+import { provideEchartsCore } from 'ngx-echarts';
+import * as echarts from 'echarts';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,5 +18,6 @@ export const appConfig: ApplicationConfig = {
         preset: Aura,
       },
     }),
+    provideEchartsCore({ echarts }),
   ],
 };
