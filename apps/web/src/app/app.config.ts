@@ -16,6 +16,9 @@ export const appConfig: ApplicationConfig = {
     provideOptimus({
       theme: {
         preset: Aura,
+        options: {
+          darkModeSelector: '.app-dark',
+        },
       },
     }),
     provideEchartsCore({ echarts }),

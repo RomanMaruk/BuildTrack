@@ -33,8 +33,14 @@
       <span class="app-header__badge">1</span>
     </button>
 
-    <button type="button" class="app-header__icon-btn" aria-label="Тема">
-      <span aria-hidden="true">&#127769;</span>
+    <button
+      type="button"
+      class="app-header__icon-btn"
+      [attr.aria-label]="themeService.isDark() ? 'Увімкнути світлу тему' : 'Увімкнути темну тему'"
+      [attr.aria-pressed]="themeService.isDark()"
+      (click)="toggleTheme()"
+    >
+      <span aria-hidden="true">{{ themeService.isDark() ? '☀' : '🌙' }}</span>
     </button>
 
     <button type="button" pButton class="app-header__icon-btn d-lg-inline-flex">

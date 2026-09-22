@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ButtonModule } from '@openng/optimus-ui/button';
 import { SidebarStateService } from '../sidebar-state.service';
@@ -11,7 +11,7 @@ import { SidebarStateService } from '../sidebar-state.service';
   styleUrl: './sidebar.component.scss',
 })
 export class SidebarComponent {
-  constructor(readonly sidebarState: SidebarStateService) {}
+  readonly sidebarState = inject(SidebarStateService);
 
   close(): void {
     this.sidebarState.closeMobile();
