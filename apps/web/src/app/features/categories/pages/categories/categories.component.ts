@@ -1,15 +1,15 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { TreeModule } from '@openng/optimus-ui/tree';
-import { CategoryService } from '../../services/category.service';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { ButtonModule } from '@openng/optimus-ui/button';
-import { DialogModule, Dialog } from '@openng/optimus-ui/dialog';
-import { InputTextModule } from '@openng/optimus-ui/inputtext';
-import { DialogService } from '@openng/optimus-ui/dynamicdialog';
-import { FormCategoryComponent } from '../../components/form-category/form-category.component';
-import { CategoryStoreService } from '../../services/category-store.service';
+import { ReactiveFormsModule } from '@angular/forms';
 import { TreeNode } from '@openng/optimus-ui/api';
+import { ButtonModule } from '@openng/optimus-ui/button';
+import { DialogModule } from '@openng/optimus-ui/dialog';
+import { DialogService } from '@openng/optimus-ui/dynamicdialog';
+import { InputTextModule } from '@openng/optimus-ui/inputtext';
+import { TreeModule } from '@openng/optimus-ui/tree';
+import { FormCategoryComponent } from '../../components/form-category/form-category.component';
 import { ICategoryTree } from '../../models/categories.model';
+import { CategoryStoreService } from '../../services/category-store.service';
+import { ApiCategoryService } from '../../services/api-category.service';
 @Component({
   selector: 'app-categories',
   imports: [ReactiveFormsModule, DialogModule, ButtonModule, InputTextModule, TreeModule],
@@ -18,7 +18,8 @@ import { ICategoryTree } from '../../models/categories.model';
   styleUrls: ['./categories.component.scss'],
 })
 export class CategoriesComponent implements OnInit {
-  private categoryService = inject(CategoryService);
+
+  private categoryService = inject(ApiCategoryService);
   private categoryStore = inject(CategoryStoreService);
   private dialog = inject(DialogService);
 
@@ -42,7 +43,7 @@ export class CategoriesComponent implements OnInit {
       data: node,
       children: (node.children || []).map((child) => this.toTreeNode(child)),
       expanded: true,
-      styleClass: 'category-node',
+      styleClass: 'category-node position-relative',
     };
   }
 
@@ -79,4 +80,13 @@ export class CategoriesComponent implements OnInit {
       children: node.children?.map((child) => this.expandRecursive(child, expand)),
     };
   }
+
+  editButton(event: unknown) {
+    console.log('Edit button clicked for node:', event);
+  }
+
+  deleteButton(event: unknown) {
+    console.log('Delete button clicked for node:', event);
+  }
+
 }

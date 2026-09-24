@@ -1,4 +1,4 @@
-import { computed, Service, signal } from '@angular/core';
+import { Service, signal } from '@angular/core';
 import type { ICategory } from '../models/categories.model';
 
 @Service()
@@ -8,7 +8,6 @@ export class CategoryStoreService {
 
   private categories = signal<ICategory[]>([]);
   private categoriesComputed = this.categories.asReadonly();
-  // private categoriesComputed = computed(() => this.categories());
 
   public getCategories() {
     return this.categoriesComputed;

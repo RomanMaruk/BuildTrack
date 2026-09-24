@@ -4,7 +4,7 @@ import { environment } from '../../../../environments/environment';
 import { ICategory, ICategoryPost, ICategoryTree } from '../models/categories.model';
 
 @Service()
-export class CategoryService {
+export class ApiCategoryService {
   private readonly apiUrl = environment.apiUrl;
   private readonly categoriesEndpoint = `${this.apiUrl}/api/category`;
 

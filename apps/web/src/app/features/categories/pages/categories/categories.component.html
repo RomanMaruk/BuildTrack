@@ -13,5 +13,20 @@
     <p-button icon="pi pi-minus" label="Collapse all" (click)="collapseAll()" />
   </div>
   <input type="text" class="form-control" placeholder="Search categories..." />
-  <p-tree [value]="categoriesTree()" class="w-full md:w-[30rem]" />
+  <p-tree [value]="categoriesTree()" class="w-full md:w-[30rem]">
+    <!-- <p-tree class="w-full md:w-[30rem]"> -->
+    <ng-template let-node pTemplate="default">
+      <div class="d-flex align-items-center justify-content-between gap-2 w-100">
+        <span>{{ node.label }}</span>
+
+        <span class="flex gap-1">
+          <p-button icon="pi pi-pencil" [text]="true" [rounded]="true" size="small" ariaLabel="Edit"
+            (onClick)="$event.stopPropagation(); editButton(node.key)" />
+
+          <p-button icon="pi pi-trash" [text]="true" [rounded]="true" size="small" severity="danger" ariaLabel="Delete"
+            (onClick)="$event.stopPropagation(); deleteButton(node.key)" />
+        </span>
+      </div>
+    </ng-template>
+  </p-tree>
 </div>
