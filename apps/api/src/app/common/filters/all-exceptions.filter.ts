@@ -53,7 +53,9 @@ export class AllExceptionsFilter implements ExceptionFilter {
       const status = exception.getStatus();
       const response = exception.getResponse();
       const message =
-        typeof response === 'string' ? response : ((response as { message?: string | string[] }).message ?? exception.message);
+        typeof response === 'string'
+          ? response
+          : ((response as { message?: string | string[] }).message ?? exception.message);
       return { statusCode: status, message, error: HttpStatus[status] ?? 'Error' };
     }
 

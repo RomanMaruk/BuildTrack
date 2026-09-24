@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
-import { AuthRequest, AuthUser } from '../auth/types/auth-user';
+import { AuthUser } from '../auth/types/auth-user';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
@@ -19,6 +19,11 @@ export class CategoryController {
   @Get()
   findAllForOwner(@CurrentUser() req: AuthUser) {
     return this.categoryService.findAllForOwner(req.id);
+  }
+
+  @Get('tree')
+  findTree(@CurrentUser() req: AuthUser) {
+    return this.categoryService.findTree(req.id);
   }
 
   @Get(':id')

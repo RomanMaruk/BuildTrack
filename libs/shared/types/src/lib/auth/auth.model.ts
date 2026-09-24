@@ -1,5 +1,4 @@
-import { IUserData } from "../users/user.model";
-
+import { IUserData } from '../users/user.model';
 
 export interface IAuthResponse {
   accessToken: string;

@@ -6,7 +6,7 @@
       "request": "launch",
       "name": "Debug api with Nx",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["nx", "serve", "api"],
+      "runtimeArgs": ["nx", "serve", "api", "--configuration=development"],
       "env": {
         "NODE_OPTIONS": "--inspect=9229"
       },
@@ -14,7 +14,27 @@
       "internalConsoleOptions": "neverOpen",
       "skipFiles": ["<node_internals>/**"],
       "sourceMaps": true,
-      "outFiles": ["${workspaceFolder}/apps/api/dist/**/*.(m|c|)js", "!**/node_modules/**"]
+      "autoAttachChildProcesses": true,
+      "outFiles": [
+        "${workspaceFolder}/dist/apps/api/**/*.js",
+        "!**/node_modules/**"
+      ]
+    },
+    {
+      "type": "pwa-chrome",
+      "request": "launch",
+      "name": "Debug web in Chrome",
+      "url": "http://localhost:4200",
+      "webRoot": "${workspaceFolder}",
+      "preLaunchTask": "serve web",
+      "sourceMaps": true
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Debug full stack",
+      "configurations": ["Debug api with Nx", "Debug web in Chrome"],
+      "stopAll": true
     }
   ]
 }

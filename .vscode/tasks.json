@@ -1,0 +1,23 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "serve web",
+      "type": "shell",
+      "command": "npx.cmd",
+      "args": ["nx", "serve", "web", "--configuration=development"],
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "angular",
+        "pattern": {
+          "regexp": "^$"
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".*",
+          "endsPattern": "Application bundle generation complete|Local:"
+        }
+      }
+    }
+  ]
+}

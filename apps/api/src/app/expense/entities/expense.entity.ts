@@ -1,4 +1,12 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { CurrencyCode, ExpenseUnit } from '@build-track/types';
 import { Project } from '../../project/entities/project.entity';
 import { Category } from '../../category/entities/category.entity';
@@ -77,4 +85,3 @@ export class Expense {
   @UpdateDateColumn()
   updatedAt: Date;
 }
-

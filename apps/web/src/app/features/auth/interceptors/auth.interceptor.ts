@@ -1,4 +1,4 @@
-import { HttpErrorResponse, HttpHandler, HttpInterceptorFn } from '@angular/common/http';
+import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { catchError, throwError } from 'rxjs';
@@ -25,9 +25,10 @@ export const errorInterceptor: HttpInterceptorFn = (request, next) => {
   const authService = inject(AuthService);
   return next(request).pipe(
     catchError((error: HttpErrorResponse) => {
+      console.error(`HTTP Error: ${error.status} ${error.statusText}`, error);
       if (error.status === 401) {
-        authService.logout();
         route.navigate(['/auth/login']);
+        authService.logout();
       }
 
       return throwError(() => error);

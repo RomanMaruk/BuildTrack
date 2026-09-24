@@ -1,0 +1,19 @@
+<div class="form-category-container">
+  <form class="form-group">
+    <p-autocomplete
+      [showEmptyMessage]="false"
+      [(ngModel)]="value"
+      name="category"
+      [dropdown]="true"
+      [suggestions]="categories()"
+      (completeMethod)="search($event)"
+      optionLabel="name"
+    />
+
+    <input type="text" pInputText [(ngModel)]="subCategory" name="subCategory" placeholder="Enter sub-category" />
+
+    <!-- <label class="form-control" for="name">Category Name:</label>
+  <input class="form-control mb-3" id="name" name="name" type="text" /> -->
+    <button class="btn btn-primary" type="button" (click)="createCategory()">Create</button>
+  </form>
+</div>

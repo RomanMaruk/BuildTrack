@@ -10,8 +10,32 @@ import { RouterLink } from '@angular/router';
 })
 export class RecentExpensesComponent {
   products = [
-    { date: '2026-06-01', category: 'Food', subCategory: 'Groceries', name: 'Walmart', amount: 50, sum: 50, currency: 'USD' },
-    { date: '2024-06-02', category: 'Transport', subCategory: 'Taxi', name: 'Uber', amount: 20, sum: 70, currency: 'USD' },
-    { date: '2024-06-02', category: 'Transport', subCategory: 'Taxi', name: 'Uber', amount: 20, sum: 70, currency: 'USD' },
+    {
+      date: '2026-06-01',
+      category: 'Food',
+      subCategory: 'Groceries',
+      name: 'Walmart',
+      amount: 50,
+      sum: 50,
+      currency: 'USD',
+    },
+    {
+      date: '2024-06-02',
+      category: 'Transport',
+      subCategory: 'Taxi',
+      name: 'Uber',
+      amount: 20,
+      sum: 70,
+      currency: 'USD',
+    },
+    {
+      date: '2024-06-02',
+      category: 'Transport',
+      subCategory: 'Taxi',
+      name: 'Uber',
+      amount: 20,
+      sum: 70,
+      currency: 'USD',
+    },
   ];
 }

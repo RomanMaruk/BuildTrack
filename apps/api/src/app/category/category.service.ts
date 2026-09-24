@@ -5,9 +5,13 @@ import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { Category } from './entities/category.entity';
 
+type CategoryTreeNode = Category & {
+  children: CategoryTreeNode[];
+};
+
 @Injectable()
 export class CategoryService {
-  constructor(@InjectRepository(Category) private readonly categoryRepository: Repository<Category>) {}
+  constructor(@InjectRepository(Category) private readonly categoryRepository: Repository<Category>) { }
 
   private async assertOwnedParent(parentId: string, ownerId: string) {
     const parent = await this.categoryRepository.findOne({ where: { id: parentId } });
@@ -51,6 +55,38 @@ export class CategoryService {
 
   async findAllForOwner(ownerId: string) {
     return this.categoryRepository.find({ where: { ownerId }, order: { name: 'ASC' } });
+  }
+
+  async findTree(ownerId: string): Promise<CategoryTreeNode[]> {
+    const categories = await this.categoryRepository.find({
+      where: { ownerId },
+      order: { name: 'ASC' },
+    });
+
+    const map = new Map<string, CategoryTreeNode>();
+    const roots: CategoryTreeNode[] = [];
+
+    for (const category of categories) {
+      map.set(category.id, {
+        ...category,
+        children: [],
+      });
+    }
+
+    for (const node of map.values()) {
+      if (!node.parentId) {
+        roots.push(node);
+        continue;
+      }
+
+      const parent = map.get(node.parentId);
+
+      if (parent) {
+        parent.children.push(node);
+      }
+    }
+
+    return roots;
   }
 
   async findOne(id: string, ownerId: string) {

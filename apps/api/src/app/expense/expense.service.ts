@@ -84,8 +84,13 @@ export class ExpenseService {
     );
   }
 
-  async findAllForProject(projectId: string, filters?: { categoryId?: string; supplierId?: string; dateFrom?: Date; dateTo?: Date }) {
-    let query = this.expenseRepository.createQueryBuilder('expense').where('expense.projectId = :projectId', { projectId });
+  async findAllForProject(
+    projectId: string,
+    filters?: { categoryId?: string; supplierId?: string; dateFrom?: Date; dateTo?: Date },
+  ) {
+    let query = this.expenseRepository
+      .createQueryBuilder('expense')
+      .where('expense.projectId = :projectId', { projectId });
 
     if (filters?.categoryId) {
       query = query.andWhere('expense.categoryId = :categoryId', { categoryId: filters.categoryId });
