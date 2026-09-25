@@ -1,11 +1,24 @@
-<div class="header d-flex justify-content-between align-items-center mb-3">
-  <h3>Categories</h3>
+<div class="header d-flex justify-content-between align-items-center mb-3 position-relative">
+  <div class="header-title d-flex align-items-center gap-2">
+    <h3 class="m-0">Categories</h3>
+    <button class="btn btn-secondary-outline p-1 btn-small text-primary" (click)="trigger()">
+      <span aria-hidden="true">⟳</span>
+    </button>
+  </div>
   <button class="btn btn-primary" (click)="addCategory()">
     <span class="btn-icon me-2 fs-5" aria-hidden="true">+</span>
     <span>Add Category</span>
   </button>
+  @if(categoriesTreeByResource.isLoading()) {
+  <h1 class="loading position-absolute top-50 start-50 translate-middle">Loading...</h1>
+  }
 </div>
 
+@if(categoriesTreeByResource.error()) {
+<div class="error text-danger alert alert-danger position-absolute bottom-0 end-0">
+  <h5 class="error">Error loading categories</h5>
+</div>
+}
 
 <div class="card">
   <div class="d-flex flex-wrap gap-2 p-2">
@@ -21,7 +34,7 @@
 
         <span class="flex gap-1">
           <p-button icon="pi pi-pencil" [text]="true" [rounded]="true" size="small" ariaLabel="Edit"
-            (onClick)="$event.stopPropagation(); editButton(node.key)" />
+            (onClick)="$event.stopPropagation(); editButton(node)" />
 
           <p-button icon="pi pi-trash" [text]="true" [rounded]="true" size="small" severity="danger" ariaLabel="Delete"
             (onClick)="$event.stopPropagation(); deleteButton(node.key)" />

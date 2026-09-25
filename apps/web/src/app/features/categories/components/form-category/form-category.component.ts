@@ -1,80 +1,87 @@
-import { Component, computed, inject, OnInit } from '@angular/core';
-import { AutoCompleteModule } from '@openng/optimus-ui/autocomplete';
-import type { AutoCompleteCompleteEvent } from '@openng/optimus-ui/autocomplete';
+import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { TreeNode } from '@openng/optimus-ui/api';
+import { AutoCompleteModule } from '@openng/optimus-ui/autocomplete';
+import { Button } from '@openng/optimus-ui/button';
+import { DynamicDialogConfig, DynamicDialogRef } from '@openng/optimus-ui/dynamicdialog';
 import { InputTextModule } from '@openng/optimus-ui/inputtext';
-import { DynamicDialogRef } from '@openng/optimus-ui/dynamicdialog';
-import { DynamicDialogConfig } from '@openng/optimus-ui/dynamicdialog';
-import { CategoryStoreService } from '../../services/category-store.service';
-import { ICategory, ICategoryPost } from '../../models/categories.model';
+import { TreeSelectModule } from '@openng/optimus-ui/treeselect';
+import { ICategory, ICategoryPost, ICategoryTree } from '../../models/categories.model';
 import { ApiCategoryService } from '../../services/api-category.service';
+import { CategoriesNodeTreeService } from '../../services/categories-node-tree.service';
 
 @Component({
   selector: 'app-form-category',
-  imports: [AutoCompleteModule, FormsModule, InputTextModule],
+  imports: [AutoCompleteModule, FormsModule, InputTextModule, TreeSelectModule, Button],
   templateUrl: './form-category.component.html',
   styleUrl: './form-category.component.scss',
 })
-export class FormCategoryComponent implements OnInit {
-  value: string | ICategory | null = null;
+export class FormCategoryComponent {
+  filterText = signal('');
+  newCategoryName = computed(() => this.filterText().trim());
   subCategory = '';
 
-  private categoryStore = inject(CategoryStoreService);
+  private categoryNodeTree = inject(CategoriesNodeTreeService);
   private categoryApi = inject(ApiCategoryService);
-  private dialogRef = inject(DynamicDialogRef);
+  public dialogRef = inject(DynamicDialogRef);
   private dialogConfig = inject(DynamicDialogConfig);
-  private categoriesObject = this.categoryStore.getCategories();
-  public categories = computed(() => this.categoriesObject());
+  public categories = this.categoryNodeTree.categoriesTree;
   public readonly editingCategory: ICategory | undefined = this.dialogConfig.data?.category;
 
-  search(event: AutoCompleteCompleteEvent) {
-    const query = event.query.toLowerCase();
-    this.categories = computed(() => {
-      const categories = this.categoriesObject();
-      return categories.filter((obj) => obj.name.toLowerCase().includes(query));
-    });
-  }
-
-  ngOnInit() {
-    if (this.editingCategory) {
-      this.value = this.editingCategory.name;
-    }
-  }
+  value: string | TreeNode<ICategoryTree> | null = this.editingCategory?.name || null;
 
   createCategory() {
+    if (typeof this.value === 'object' && this.value !== null && this.subCategory.trim() !== '') {
+      const newCategory: ICategoryPost = { name: this.subCategory.trim(), parentId: this.value.key };
+      this.categoryApi.createCategory(newCategory).subscribe({
+        next: () => {
+          this.value = null;
+          this.subCategory = '';
+          this.categoryNodeTree.categoriesTreeByResource.reload();
+        },
+        error: (err) => {
+          console.error('Failed to create sub-category', err);
+        },
+      });
+    }
+  }
+
+  updateCategory() {
     if (this.editingCategory && typeof this.value === 'string' && this.value.trim() !== '') {
       this.categoryApi.updateCategory(this.editingCategory.id, { name: this.value.trim() }).subscribe({
-        next: () => this.dialogRef.close(true),
+        next: () => {
+          this.value = null;
+          this.categoryNodeTree.categoriesTreeByResource.reload();
+          this.dialogRef.close(true)
+        },
         error: (err) => console.error('Failed to update category', err),
       });
-      return;
     }
+  }
 
-    if (typeof this.value === 'string' && this.value.trim() !== '') {
-      const newCategory: ICategoryPost = { name: this.value.trim() };
+  createNewCategory(name: string) {
+    if (typeof name === 'string' && name.trim() !== '') {
+      const newCategory: ICategoryPost = { name: name.trim() };
       this.categoryApi.createCategory(newCategory).subscribe({
-        next: (category) => {
-          this.categoryStore.addCategory(category);
+        next: () => {
           this.value = null;
+          this.categoryNodeTree.categoriesTreeByResource.reload();
           this.dialogRef.close(true);
         },
         error: (err) => {
           console.error('Failed to create category', err);
         },
       });
-    } else if (typeof this.value === 'object' && this.value !== null && this.subCategory.trim() !== '') {
-      const newCategory: ICategoryPost = { name: this.subCategory.trim(), parentId: this.value.id };
-      this.categoryApi.createCategory(newCategory).subscribe({
-        next: (category) => {
-          this.categoryStore.addCategory(category);
-          this.value = null;
-          this.subCategory = '';
-          this.dialogRef.close(true);
-        },
-        error: (err) => {
-          console.error('Failed to create sub-category', err);
-        },
-      });
+    } else {
+      console.error('Invalid category name');
+    }
+  }
+
+  onFilterInput(event: Event): void {
+    const target = event.target;
+
+    if (target instanceof HTMLInputElement) {
+      this.filterText.set(target.value);
     }
   }
 }

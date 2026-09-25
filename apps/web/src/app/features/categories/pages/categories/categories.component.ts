@@ -1,4 +1,5 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TreeNode } from '@openng/optimus-ui/api';
 import { ButtonModule } from '@openng/optimus-ui/button';
@@ -8,72 +9,51 @@ import { InputTextModule } from '@openng/optimus-ui/inputtext';
 import { TreeModule } from '@openng/optimus-ui/tree';
 import { FormCategoryComponent } from '../../components/form-category/form-category.component';
 import { ICategoryTree } from '../../models/categories.model';
-import { CategoryStoreService } from '../../services/category-store.service';
 import { ApiCategoryService } from '../../services/api-category.service';
+import { CategoriesNodeTreeService } from '../../services/categories-node-tree.service';
 @Component({
   selector: 'app-categories',
-  imports: [ReactiveFormsModule, DialogModule, ButtonModule, InputTextModule, TreeModule],
+  imports: [ReactiveFormsModule, DialogModule, ButtonModule, InputTextModule, TreeModule, CommonModule],
   providers: [DialogService],
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.scss'],
 })
-export class CategoriesComponent implements OnInit {
+export class CategoriesComponent {
 
   private categoryService = inject(ApiCategoryService);
-  private categoryStore = inject(CategoryStoreService);
+  private categoryTreeNodes = inject(CategoriesNodeTreeService);
   private dialog = inject(DialogService);
 
-  public categories = this.categoryStore.getCategories();
-  public categoriesTree = signal<TreeNode[]>([]);
 
-  ngOnInit() {
-    this.categoryService.getCategories().subscribe((categories) => {
-      this.categoryStore.setCategories(categories);
-    });
-    this.categoryService.getCategoriesTree().subscribe((categoriesTree) => {
-      const treeNodes: TreeNode[] = categoriesTree.map((node) => this.toTreeNode(node));
-      this.categoriesTree.set(treeNodes);
-    });
-  }
 
-  private toTreeNode(node: ICategoryTree): TreeNode {
-    return {
-      key: node.id,
-      label: node.name,
-      data: node,
-      children: (node.children || []).map((child) => this.toTreeNode(child)),
-      expanded: true,
-      styleClass: 'category-node position-relative',
-    };
+  public categoriesTreeByResource = this.categoryTreeNodes.categoriesTreeByResource;
+  public categoriesTree = this.categoryTreeNodes.categoriesTree;
+
+  trigger() {
+    this.categoryTreeNodes.categoriesTreeByResource.reload();
   }
 
   addCategory() {
-    const dialogRef = this.dialog.open(FormCategoryComponent, {
+    this.dialog.open(FormCategoryComponent, {
       header: 'Add Category',
       closable: true,
       width: '40vw',
       height: '500px',
     });
-
-    dialogRef?.onClose.subscribe((result) => {
-      console.log(result);
-    });
   }
 
 
   expandAll() {
-    const updatedFiles = this.categoriesTree().map((node) => this.expandRecursive(node, true));
-    this.categoriesTree.set(updatedFiles);
+    this.categoryTreeNodes.categoriesTree.update((nodes) => nodes.map((node) => this.expandRecursive(node, true)));
   }
 
   collapseAll() {
-    const updatedFiles = this.categoriesTree().map((node) => this.expandRecursive(node, false));
-    this.categoriesTree.set(updatedFiles);
+    this.categoryTreeNodes.categoriesTree.update((nodes) => nodes.map((node) => this.expandRecursive(node, false)));
   }
 
   // Returns a new node (and new nested children) instead of mutating in place,
   // so the OnPush tree nodes detect the input change and re-render.
-  private expandRecursive(node: TreeNode, expand: boolean): TreeNode {
+  private expandRecursive(node: TreeNode<ICategoryTree>, expand: boolean): TreeNode<ICategoryTree> {
     return {
       ...node,
       expanded: expand,
@@ -81,12 +61,29 @@ export class CategoriesComponent implements OnInit {
     };
   }
 
-  editButton(event: unknown) {
-    console.log('Edit button clicked for node:', event);
+  editButton(event: TreeNode<ICategoryTree>) {
+    this.dialog.open(FormCategoryComponent, {
+      header: 'Edit Category',
+      closable: true,
+      width: '40vw',
+      height: '600px',
+      data: {
+        category: event.data,
+      },
+    });
   }
 
-  deleteButton(event: unknown) {
-    console.log('Delete button clicked for node:', event);
+  deleteButton(id: string) {
+    this.categoryService.deleteCategory(id).subscribe({
+      next: () => {
+        this.trigger();
+      },
+      error: (err) => {
+        console.error('Error deleting category:', err);
+      },
+    });
   }
 
 }
+
+
