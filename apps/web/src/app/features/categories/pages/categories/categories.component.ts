@@ -75,14 +75,16 @@ export class CategoriesComponent {
   }
 
   deleteButton(id: string) {
-    this.categoryService.deleteCategory(id).subscribe({
-      next: () => {
-        this.trigger();
-      },
-      error: (err) => {
-        console.error('Error deleting category:', err);
-      },
-    });
+    if (window.confirm('Are you sure you want to delete this category?') && id) {
+      this.categoryService.deleteCategory(id).subscribe({
+        next: () => {
+          this.trigger();
+        },
+        error: (err) => {
+          console.error('Error deleting category:', err);
+        },
+      });
+    }
   }
 
 }
