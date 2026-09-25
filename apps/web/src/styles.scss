@@ -6,6 +6,20 @@
   --shadow-card: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
   --sidebar-bg: #10264c;
   --text-color: #333;
+  --card-background: #f3f7fc;
+  --header-background: #f3f7fc;
+  --header-background-gradient: linear-gradient(180deg, #e9edf5 0%, var(--header-background) 100%);
+  --color-text-primary: #1f2937;
+  --color-text-secondary: #666;
+  --color-text-tertiary: #999;
+}
+:root.app-dark {
+  --card-background: #1e1e1e;
+  --header-background: #1e1e1e;
+  --header-background-gradient: linear-gradient(180deg, #595a5c 0%, var(--header-background) 100%);
+  --color-text-primary: #fff;
+  --color-text-secondary: #ccc;
+  --color-text-tertiary: #999;
 }
 
 html,
@@ -14,8 +28,9 @@ body {
   height: 100%;
   margin: 0;
   font-family: Inter, sans-serif;
-  background-color: #f3f7fc;
+  background-color: var(--card-background);
   box-sizing: border-box;
+  color: var(--color-text-primary);
 }
 
 .shadow {
@@ -28,4 +43,10 @@ body {
 
 .p-tree-node-label {
   width: 100%;
+}
+.app-dark {
+  .shell-layout {
+    background-color: var(--card-background) ;
+  }
+
 }

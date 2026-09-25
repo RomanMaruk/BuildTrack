@@ -1,6 +1,7 @@
-import { CommonModule } from '@angular/common';
+import { TitleCasePipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CardModule } from '@openng/optimus-ui/card';
 import { TreeNode } from '@openng/optimus-ui/api';
 import { ButtonModule } from '@openng/optimus-ui/button';
 import { DialogModule } from '@openng/optimus-ui/dialog';
@@ -13,7 +14,7 @@ import { ApiCategoryService } from '../../services/api-category.service';
 import { CategoriesNodeTreeService } from '../../services/categories-node-tree.service';
 @Component({
   selector: 'app-categories',
-  imports: [ReactiveFormsModule, DialogModule, ButtonModule, InputTextModule, TreeModule, CommonModule],
+  imports: [ReactiveFormsModule, DialogModule, ButtonModule, InputTextModule, TreeModule, TitleCasePipe, CardModule],
   providers: [DialogService],
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.scss'],
@@ -37,8 +38,8 @@ export class CategoriesComponent {
     this.dialog.open(FormCategoryComponent, {
       header: 'Add Category',
       closable: true,
-      width: '40vw',
-      height: '500px',
+      width: '50vw',
+      height: '600px',
     });
   }
 
@@ -65,7 +66,7 @@ export class CategoriesComponent {
     this.dialog.open(FormCategoryComponent, {
       header: 'Edit Category',
       closable: true,
-      width: '40vw',
+      width: '50vw',
       height: '600px',
       data: {
         category: event.data,

@@ -1,0 +1,64 @@
+:host {
+  display: block;
+}
+
+.categories-tree {
+  padding: 0.5rem;
+}
+
+.category-row {
+  min-height: 2.75rem;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease;
+}
+
+.category-name {
+  min-width: 0;
+  overflow: hidden;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.category-actions {
+  flex-shrink: 0;
+  // opacity: 0;
+  transition: opacity 150ms ease;
+}
+
+:host ::ng-deep .categories-tree .p-tree-node-content {
+  border-radius: 0.5rem;
+  padding: 0.1rem;
+}
+
+:host ::ng-deep .categories-tree .p-tree-node-content:hover,
+:host ::ng-deep .categories-tree .p-tree-node-content:focus-within {
+  background-color: transparent;
+}
+
+:host ::ng-deep .categories-tree .p-tree-node-content:hover .category-row,
+:host ::ng-deep .categories-tree .p-tree-node-content:focus-within .category-row {
+  background-color: var(--p-tree-node-hover-background);
+  border-color: #d7e3f2;
+}
+
+:host ::ng-deep .categories-tree .p-tree-node-content:hover .category-actions,
+:host ::ng-deep .categories-tree .p-tree-node-content:focus-within .category-actions {
+  opacity: 1;
+}
+
+:host ::ng-deep .categories-tree .p-tree-node-children {
+  margin-left: 0.8rem;
+  padding-left: 0.75rem;
+  border-left: 2px solid #dbe6f3;
+}
+
+@media (max-width: 576px) {
+  .category-actions {
+    opacity: 1;
+  }
+}

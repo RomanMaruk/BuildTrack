@@ -9,30 +9,29 @@
     <span class="btn-icon me-2 fs-5" aria-hidden="true">+</span>
     <span>Add Category</span>
   </button>
-  @if(categoriesTreeByResource.isLoading()) {
+  @if (categoriesTreeByResource.isLoading()) {
   <h1 class="loading position-absolute top-50 start-50 translate-middle">Loading...</h1>
   }
 </div>
 
-@if(categoriesTreeByResource.error()) {
+@if (categoriesTreeByResource.error()) {
 <div class="error text-danger alert alert-danger position-absolute bottom-0 end-0">
   <h5 class="error">Error loading categories</h5>
 </div>
 }
 
-<div class="card">
+<div class="card p-2">
   <div class="d-flex flex-wrap gap-2 p-2">
     <p-button icon="pi pi-plus" label="Expand all" (click)="expandAll()" />
     <p-button icon="pi pi-minus" label="Collapse all" (click)="collapseAll()" />
   </div>
-  <input type="text" class="form-control" placeholder="Search categories..." />
-  <p-tree [value]="categoriesTree()" class="w-full md:w-[30rem]">
-    <!-- <p-tree class="w-full md:w-[30rem]"> -->
+  <input pInputText type="text" class="mb-3" placeholder="Search categories..." />
+  <p-tree [value]="categoriesTree()" class="categories-tree">
     <ng-template let-node pTemplate="default">
-      <div class="d-flex align-items-center justify-content-between gap-2 w-100">
-        <span>{{ node.label }}</span>
+      <div class="category-row d-flex align-items-center justify-content-between gap-2 w-100">
+        <span class="category-name">{{ node.label | titlecase}}</span>
 
-        <span class="flex gap-1">
+        <span class="category-actions d-flex gap-1">
           <p-button icon="pi pi-pencil" [text]="true" [rounded]="true" size="small" ariaLabel="Edit"
             (onClick)="$event.stopPropagation(); editButton(node)" />
 

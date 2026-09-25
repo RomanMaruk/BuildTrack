@@ -1,8 +1,8 @@
-import { Service, inject, resource, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Service, inject, resource } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { ICategory, ICategoryPost, ICategoryTree } from '../models/categories.model';
-import { firstValueFrom } from 'rxjs';
 
 @Service()
 export class ApiCategoryService {
@@ -15,10 +15,8 @@ export class ApiCategoryService {
     return this.http.get<ICategory[]>(this.categoriesEndpoint);
   }
 
-  private trigger = signal({});
   public getCategoryTreeByResource() {
     const resouce = resource({
-      params: () => this.trigger(),
       loader: async () => await firstValueFrom(
         this.http.get<ICategoryTree[]>(`${this.categoriesEndpoint}/tree`),
       )
